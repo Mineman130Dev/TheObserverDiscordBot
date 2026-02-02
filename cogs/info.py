@@ -1,17 +1,16 @@
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # Bot info group
+    observer_group = app_commands.Group(name="observer", description="Commands related to The Observer bot")
 
-    @commands.group(name="observer", invoke_without_command=True, case_insensitive=True)
-    async def observer_info_group(self, ctx):
-        await ctx.send("Try typing `!bot info`!")
-
-    @observer_info_group.command(name="info")
-    async def about_bot_info(self, ctx):
+    @observer_group.command(name="info", description="View technical specs and status of The Observer")
+    async def about_bot_info(self, interaction: discord.Interaction):
         embed = discord.Embed(
             title="📊 Statistics for The Observer",
             description="Here is my up to date info!",
@@ -25,17 +24,15 @@ class Info(commands.Cog):
             value="I help manage the server and provide\nuseful info to members! Type `!help` to see more.", 
             inline=False
         )
-        embed.set_footer(text=f"Requested by {ctx.author.name}")
-        await ctx.send(embed=embed)
+        embed.set_footer(text=f"Requested by {interaction.user.name}")
+        await interaction.response.send_message(embed=embed)
 
     # Server info group
-    @commands.group(name="realm", invoke_without_command=True, case_insensitive=True)
-    async def realm(self, ctx):
-        await ctx.send("Try typing `!server info` to see details about this place!")
+    realm_group = app_commands.Group(name="realm", description="Commands related to this server")
 
-    @realm.command(name="info")
-    async def realm_info(self, ctx):
-        guild = ctx.guild
+    @realm_group.command(name="info", description="Scan the current realm's data and statistics")
+    async def realm_info(self, interaction: discord.Interaction):
+        guild = interaction.guild
         embed = discord.Embed(
             title=f"📊 Statistics for {guild.name}",
             description="Here is the current breakdown of our server.\n\n**[Join our Server!](https://discord.gg/WZnrwJr3Hh)**",
@@ -55,8 +52,7 @@ class Info(commands.Cog):
         embed.add_field(name="Created On", value=created_at, inline=False)
         embed.set_footer(text=f"Server ID: {guild.id}")
 
-        await ctx.send(embed=embed)
+        await interaction.response.send_message(embed=embed)
 
-# This part is crucial for loading the cog
 async def setup(bot):
     await bot.add_cog(Info(bot))

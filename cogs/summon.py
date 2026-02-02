@@ -1,19 +1,14 @@
 import discord
 from discord.ext import commands
-
-intents = discord.Intents.default()
-intents.message_content = True
-intents.members = True
-
-bot = commands.Bot(command_prefix="!", intents=intents, help_command=None)
+from discord import app_commands
 
 class Summon(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @bot.command()
-    async def summon(self, ctx):
-        await ctx.send('Here!')
+    @app_commands.command(name="summon", description="Summon The Observer to the chat")
+    async def rando(self, interaction: discord.Interaction):
+        await interaction.response.send_message('Hmm?')
 
 async def setup(bot):
     await bot.add_cog(Summon(bot))
