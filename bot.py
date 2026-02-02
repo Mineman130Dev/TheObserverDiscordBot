@@ -31,7 +31,7 @@ async def on_ready():
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start('TOKEN')
+        await bot.start(TOKEN)
 
 # Start the bot
 if __name__ == "__main__":
