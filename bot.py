@@ -22,20 +22,32 @@ class TheObserver(commands.Bot):
             help_command=None
         )
 
-    # 2. Setup Hook (Runs before the bot connects)
     async def setup_hook(self):
-        # Load Cogs
+        # 1. Load Cogs
         for filename in os.listdir('./cogs'):
             if filename.endswith('.py'):
                 await self.load_extension(f'cogs.{filename[:-3]}')
                 print(f'📦 Loaded Cog: {filename}')
 
-        # 3. Sync Slash Commands
-        # This makes the / commands show up in Discord
+        # 2. THE CLEANER: Run this to wipe the double commands from your test server
+        GUILD_ID = 1467059579795017874 
+        guild = discord.Object(id=GUILD_ID)
+        
+        # This clears the "Guild Bucket" to stop the double commands
+        self.tree.clear_commands(guild=guild)
+        await self.tree.sync(guild=guild)
+        
+        # This syncs the "Global Bucket" (the one you want to keep)
         await self.tree.sync()
-        print('📡 Slash commands synced globally')
+        
+        print(f"🧹 Commands cleared for guild {GUILD_ID} and synced globally!")
 
     async def on_ready(self):
+        # Alternatives: discord.Game(name="...")
+        activity = discord.Activity(type=discord.ActivityType.watching, name="Arcus logs | /help")
+        
+        await self.change_presence(status=discord.Status.online, activity=activity)
+        
         print(f'✅ Logged in as {self.user}')
         print('--------------------------')
 

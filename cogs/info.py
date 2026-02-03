@@ -17,7 +17,7 @@ class Info(commands.Cog):
             color=0x3498db
         )
         embed.add_field(name="Author", value="Mineman130", inline=True)
-        embed.add_field(name="Version", value="1.1.0", inline=True)
+        embed.add_field(name="Version", value="1.2.0", inline=True)
         embed.add_field(name="Language", value="Python 3.14\n(discord.py)", inline=True)
         embed.add_field(
             name="What do I do?", 
@@ -35,7 +35,7 @@ class Info(commands.Cog):
         guild = interaction.guild
         embed = discord.Embed(
             title=f"📊 Statistics for {guild.name}",
-            description="Here is the current breakdown of our server.\n\n**[Join our Server!](https://discord.gg/WZnrwJr3Hh)**",
+            description="Here is the current breakdown of our server.\n",
             color=discord.Color.green()
         )
 

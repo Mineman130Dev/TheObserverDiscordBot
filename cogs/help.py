@@ -26,6 +26,31 @@ class Help(commands.Cog):
             value="`/realm info` - Scan the current realm's data.", 
             inline=False
         )
+        embed.add_field(
+            name="？Summon", 
+            value="`/summon` - Check if The Observer is actively watching", 
+            inline=False
+        )
+        embed.add_field(
+            name="🤏Clock That Tea", 
+            value="`/clock` - Have the Observer clock that tea 🤏", 
+            inline=False
+        )
+        embed.add_field(
+            name="🎰Spin Some Slots", 
+            value="`/slots` - Spin the Observer's slots!🎰", 
+            inline=False
+        )
+        embed.add_field(
+            name="5️⃣Guess a Number", 
+            value="`/guess` - Guess a number and win some credits!5️⃣", 
+            inline=False
+        )
+        embed.add_field(
+            name="🏦View Your Balance", 
+            value="`/guess` - See how many credits you have in the bank!🏦", 
+            inline=False
+        )
         
         embed.set_footer(text="The Fog is ever-shifting. | Slash Commands")        
         if self.bot.user.display_avatar:
