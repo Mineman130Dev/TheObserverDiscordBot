@@ -49,7 +49,7 @@ class TheObserver(commands.Bot):
         await self.change_presence(status=discord.Status.online, activity=activity)
         
         print(f'✅ Logged in as {self.user}')
-        print('--------------------------')
+        print('---------------------------')
 
 # 4. Initialize and Run
 bot = TheObserver()
